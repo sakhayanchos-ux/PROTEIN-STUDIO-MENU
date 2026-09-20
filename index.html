@@ -73,7 +73,14 @@ button,input,select,textarea{font:inherit}button{cursor:pointer;color:inherit}.s
   <h2 class="section-title">ДАВАЙТЕ ЗНАКОМИТЬСЯ ✦</h2>
   <p class="section-kicker">PROTEIN STUDIO × Herbalife</p>
   <div class="earn-hero" style="margin-top:14px">
-    <p><strong>Herbalife — международная компания, основанная в 1980 году.</strong> Компания работает в 95 странах и сотрудничает со спортсменами и командами мирового уровня, включая Криштиану Роналду.</p>
+    <p><strong>Herbalife с 1980 года</strong>
+      <br>Международная компания в сфере питания и активного образа жизни, представленная в 95 странах.</p>
+    <p><strong>Наука. Питание.Люди.</p><strong>
+      <br>Продукты и программы помогают людям уделять больше вниманию питанию, активности, целям и поддержке. С нами сотрудничают лучшие ученые, профессионалы и специалисты в области нутрициологии. В состав Научно-консультационного совета Herbalife входят более 20 ученых из 18 стран мира.</p>
+    <p><strong>Спорт мирового уровня</p><strong>
+      <br>Herbalife сотрудничает со спортсменами и командами по всему миру, включая Криштиану Роналду.</p>
+    <p><strong>Главное - люди</strong>
+      <br>Помогаем ставить цели, сохранять мотивацию и двигаться к более активному образу жизни.</p>
     <div class="stats"><div class="stat"><b>1980</b><span>год основания</span></div><div class="stat"><b>95</b><span>стран</span></div><div class="stat"><b>120+</b><span>спортсменов и команд*</span></div></div>
     <p>В клубе мы помогаем людям ставить цели, получать поддержку, формировать привычки и двигаться к более активному образу жизни.</p>
   </div>
@@ -103,24 +110,24 @@ let ref=localStorage.getItem('ps_ref');if(!CONSULTANTS[ref])ref=null;
 if(ref){consultantBar.hidden=false;consultantName.textContent=CONSULTANTS[ref].name}
 const money=n=>new Intl.NumberFormat('ru-RU',{style:'currency',currency:'RUB',minimumFractionDigits:n%1?2:0}).format(n);
 const products=[
-{id:'coffee',type:'drink',name:'Кофе с протеином',img:'assets/drinks/coffee.png',price:329.43,kcal:80,p:15,f:1,c:3,tags:['coffee','protein','sweet'],desc:'Белковый кофейный напиток с насыщенным вкусом.',bases:['Вода','Молоко'],adds:['Какао','Маршмеллоу','Корица']},
-{id:'cocktail',type:'drink',name:'Протеиновый коктейль',img:'assets/drinks/protein-cocktail.png',price:190.95,kcal:90,p:10,f:1.5,c:9,tags:['protein','sweet'],desc:'Протеиновый коктейль для сбалансированного перекуса.',bases:['Вода','Молоко'],adds:[]},
-{id:'collagen',type:'drink',name:'Коллагеновый лимонад',img:'assets/drinks/collagen.png',price:227.40,kcal:20.4,p:2.25,f:0,c:0,tags:['beauty','fresh'],desc:'Лёгкий освежающий напиток с выбором вида коллагена.',bases:['Вода','Газированная вода'],adds:['Лёд'],collagen:true},
-{id:'detox',type:'drink',name:'Detox Fresh',img:'assets/drinks/detox.png',price:237,kcal:50,p:3,f:.4,c:6.3,tags:['fresh','beauty'],desc:'Свежий зелёный напиток с растительными компонентами.',bases:['Вода','Газированная вода'],adds:['Огурец','Лимон','Лёд']},
-{id:'tea',type:'drink',name:'Энергетический чай',img:'assets/drinks/energy-tea.png',price:96.93,kcal:6,p:0,f:0,c:0,tags:['energy','fresh'],desc:'Лёгкий тонизирующий травяной напиток.',bases:['Вода','Молоко'],adds:['Лёд']},
-{id:'apple',type:'drink',name:'Яблоко & овсянка',img:'assets/drinks/apple-oat.png',price:116.87,kcal:15,p:.1,f:0,c:.5,tags:['sweet'],desc:'Мягкий яблочно-овсяный вкус и пищевые волокна.',bases:['Вода','Молоко'],adds:['Маршмеллоу','Мюсли','Ягоды']},
-{id:'sport',type:'drink',name:'Спортивный напиток с протеином',img:'assets/drinks/sport-protein.png',price:280,kcal:190,p:25,f:1.5,c:18,tags:['protein','sweet'],desc:'Шоколадный спортивный протеиновый напиток.',bases:['Вода','Молоко'],adds:['Маршмеллоу','Мюсли','Ягоды']},
-{id:'cr7',type:'drink',name:'CR7 Drive',img:'assets/drinks/cr7.png',price:131.75,kcal:95,p:0,f:0,c:23,tags:['energy','fresh'],desc:'Освежающий напиток для активного дня.',bases:['Вода','Газированная вода'],adds:['Ягоды','Лёд']},
-{id:'vitc',type:'drink',name:'Энергетический напиток с витамином C',img:'assets/drinks/vitamin-c.png',price:272.80,kcal:9,p:0,f:0,c:0,tags:['energy','fresh'],desc:'Шипучий цитрусовый напиток с витаминным комплексом.',bases:['Вода'],adds:['Апельсин','Лёд']},
-{id:'chips-sc',type:'snack',name:'Протеиновые чипсы · сметана и лук',img:'assets/snacks/snack1.png',price:296.80,kcal:130,p:12,f:5,c:11,tags:['snack','protein'],desc:'Хрустящий протеиновый перекус со вкусом сметаны и лука.'},
-{id:'chips-bbq',type:'snack',name:'Протеиновые чипсы · барбекю',img:'assets/snacks/snack2.png',price:296.80,kcal:130,p:11,f:4.5,c:11,tags:['snack','protein'],desc:'Хрустящий протеиновый перекус со вкусом барбекю.'},
-{id:'h24-dark',type:'snack',name:'H24 Achieve · тёмный шоколад',img:'assets/snacks/snack3.png',price:480.50,kcal:210,p:21,f:7.5,c:22,tags:['snack','protein','sweet'],desc:'Высокопротеиновый спортивный батончик.'},
-{id:'h24-cookie',type:'snack',name:'H24 Achieve · шоколадное печенье',img:'assets/snacks/snack4.png',price:480.50,kcal:200,p:21,f:6,c:24,tags:['snack','protein','sweet'],desc:'Высокопротеиновый батончик со вкусом печенья.'},
-{id:'f1-dark',type:'snack',name:'Formula 1 Express · тёмный шоколад',img:'assets/snacks/snack5.png',price:328.29,kcal:207,p:14,f:6,c:21,tags:['snack','protein','sweet'],desc:'Порционный протеиновый перекус.'},
-{id:'bites-lemon',type:'snack',name:'Protein Bites · лимон',img:'assets/snacks/snack6.png',price:125.89,kcal:130,p:8,f:5,c:13,tags:['snack','sweet'],desc:'Мини-перекус со вкусом лимона и хрустящей карамели.'},
-{id:'bites-vanilla',type:'snack',name:'Protein Bites · ваниль',img:'assets/snacks/snack7.png',price:125.89,kcal:120,p:8,f:5,c:13,tags:['snack','sweet'],desc:'Мини-перекус со вкусом ванили и хрустящей карамели.'},
-{id:'f1-cranberry',type:'snack',name:'Formula 1 Express · клюква и белый шоколад',img:'assets/snacks/snack8.png',price:328.29,kcal:210,p:16,f:6.5,c:21,tags:['snack','protein','sweet'],desc:'Порционный перекус с клюквой и белым шоколадом.'},
-{id:'lemon-bar',type:'snack',name:'Протеиновый батончик · лимон',img:'assets/snacks/snack9.png',price:210,kcal:140,p:10,f:4,c:15,tags:['snack','protein','sweet'],desc:'Лимонный протеиновый батончик.'}
+{id:'coffee',type:'drink',name:'Кофе с протеином',img:'coffee.png',price:329.43,kcal:80,p:15,f:1,c:3,tags:['coffee','protein','sweet'],desc:'Белковый кофейный напиток с насыщенным вкусом.',bases:['Вода','Молоко'],adds:['Какао','Маршмеллоу','Корица']},
+{id:'cocktail',type:'drink',name:'Протеиновый коктейль',img:'protein-cocktail.png',price:190.95,kcal:90,p:10,f:1.5,c:9,tags:['protein','sweet'],desc:'Протеиновый коктейль для сбалансированного перекуса.',bases:['Вода','Молоко'],adds:[]},
+{id:'collagen',type:'drink',name:'Коллагеновый лимонад',img:'collagen.png',price:227.40,kcal:20.4,p:2.25,f:0,c:0,tags:['beauty','fresh'],desc:'Лёгкий освежающий напиток с выбором вида коллагена.',bases:['Вода','Газированная вода'],adds:['Лёд'],collagen:true},
+{id:'detox',type:'drink',name:'Detox Fresh',img:'detox.png',price:237,kcal:50,p:3,f:.4,c:6.3,tags:['fresh','beauty'],desc:'Свежий зелёный напиток с растительными компонентами.',bases:['Вода','Газированная вода'],adds:['Огурец','Лимон','Лёд']},
+{id:'tea',type:'drink',name:'Энергетический чай',img:'energy-tea.png',price:96.93,kcal:6,p:0,f:0,c:0,tags:['energy','fresh'],desc:'Лёгкий тонизирующий травяной напиток.',bases:['Вода','Молоко'],adds:['Лёд']},
+{id:'apple',type:'drink',name:'Яблоко & овсянка',img:'apple-oat.png',price:116.87,kcal:15,p:.1,f:0,c:.5,tags:['sweet'],desc:'Мягкий яблочно-овсяный вкус и пищевые волокна.',bases:['Вода','Молоко'],adds:['Маршмеллоу','Мюсли','Ягоды']},
+{id:'sport',type:'drink',name:'Спортивный напиток с протеином',img:'sport-protein.png',price:280,kcal:190,p:25,f:1.5,c:18,tags:['protein','sweet'],desc:'Шоколадный спортивный протеиновый напиток.',bases:['Вода','Молоко'],adds:['Маршмеллоу','Мюсли','Ягоды']},
+{id:'cr7',type:'drink',name:'CR7 Drive',img:'cr7.png',price:131.75,kcal:95,p:0,f:0,c:23,tags:['energy','fresh'],desc:'Освежающий напиток для активного дня.',bases:['Вода','Газированная вода'],adds:['Ягоды','Лёд']},
+{id:'vitc',type:'drink',name:'Энергетический напиток с витамином C',img:'vitamin-c.png',price:272.80,kcal:9,p:0,f:0,c:0,tags:['energy','fresh'],desc:'Шипучий цитрусовый напиток с витаминным комплексом.',bases:['Вода'],adds:['Апельсин','Лёд']},
+{id:'chips-sc',type:'snack',name:'Протеиновые чипсы · сметана и лук',img:'snack1.png',price:296.80,kcal:130,p:12,f:5,c:11,tags:['snack','protein'],desc:'Хрустящий протеиновый перекус со вкусом сметаны и лука.'},
+{id:'chips-bbq',type:'snack',name:'Протеиновые чипсы · барбекю',img:'snack2.png',price:296.80,kcal:130,p:11,f:4.5,c:11,tags:['snack','protein'],desc:'Хрустящий протеиновый перекус со вкусом барбекю.'},
+{id:'h24-dark',type:'snack',name:'H24 Achieve · тёмный шоколад',img:'snack3.png',price:480.50,kcal:210,p:21,f:7.5,c:22,tags:['snack','protein','sweet'],desc:'Высокопротеиновый спортивный батончик.'},
+{id:'h24-cookie',type:'snack',name:'H24 Achieve · шоколадное печенье',img:'snack4.png',price:480.50,kcal:200,p:21,f:6,c:24,tags:['snack','protein','sweet'],desc:'Высокопротеиновый батончик со вкусом печенья.'},
+{id:'f1-dark',type:'snack',name:'Formula 1 Express · тёмный шоколад',img:'snack5.png',price:328.29,kcal:207,p:14,f:6,c:21,tags:['snack','protein','sweet'],desc:'Порционный протеиновый перекус.'},
+{id:'bites-lemon',type:'snack',name:'Protein Bites · лимон',img:'snack6.png',price:125.89,kcal:130,p:8,f:5,c:13,tags:['snack','sweet'],desc:'Мини-перекус со вкусом лимона и хрустящей карамели.'},
+{id:'bites-vanilla',type:'snack',name:'Protein Bites · ваниль',img:'snack7.png',price:125.89,kcal:120,p:8,f:5,c:13,tags:['snack','sweet'],desc:'Мини-перекус со вкусом ванили и хрустящей карамели.'},
+{id:'f1-cranberry',type:'snack',name:'Formula 1 Express · клюква и белый шоколад',img:'snack8.png',price:328.29,kcal:210,p:16,f:6.5,c:21,tags:['snack','protein','sweet'],desc:'Порционный перекус с клюквой и белым шоколадом.'},
+{id:'lemon-bar',type:'snack',name:'Протеиновый батончик · лимон',img:'snack9.png',price:210,kcal:140,p:10,f:4,c:15,tags:['snack','protein','sweet'],desc:'Лимонный протеиновый батончик.'}
 ];
 const ADD_MACROS={
 'Молоко':{price:0,kcal:104,p:5.6,f:5,c:9.4},'Какао':{price:35,kcal:20,p:1.2,f:.7,c:1.2},'Маршмеллоу':{price:35,kcal:32,p:0,f:0,c:8},'Корица':{price:0,kcal:2,p:0,f:0,c:.6},'Мюсли':{price:35,kcal:56,p:1.5,f:1,c:9.5},'Ягоды':{price:35,kcal:10,p:.2,f:.1,c:2.1},'Огурец':{price:35,kcal:2,p:.1,f:0,c:.4},'Лимон':{price:35,kcal:3,p:.1,f:0,c:.9},'Лёд':{price:0,kcal:0,p:0,f:0,c:0},'Апельсин':{price:35,kcal:14,p:.3,f:0,c:3.3},'Газированная вода':{price:0,kcal:0,p:0,f:0,c:0},'Вода':{price:0,kcal:0,p:0,f:0,c:0}
