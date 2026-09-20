@@ -1,0 +1,11 @@
+{
+  "name":"МЕНЮ ПРОТЕИН СТУДИО",
+  "short_name":"ПРОТЕИН СТУДИО",
+  "start_url":"./",
+  "display":"standalone",
+  "background_color":"#eef2ff",
+  "theme_color":"#eef2ff",
+  "icons":[
+    {"src":"assets/app-icon.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
+  ]
+}
