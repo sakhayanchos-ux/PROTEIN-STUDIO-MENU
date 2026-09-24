@@ -136,7 +136,7 @@ const cartSummary=document.getElementById('cartSummary');
 const openCartBtn=document.getElementById('openCart');
 
 const CONSULTANTS={
-DL:{name:'Даниса Лаврентьева',phone:'79142254346'},SS:{name:'Сахаяна Скрябина',phone:'79142609616'},TV:{name:'Татьяна Вензель',phone:'79248994882'},TH:{name:'Татьяна Христофорова',phone:'79244646606'},OP:{name:'Ольга Попова',phone:'79627360605'},VN:{name:'Виктория Никитина',phone:'79247611616'}
+DL:{name:'Даниса Лаврентьева',phone:'79142254346'},SS:{name:'Сахаяна Скрябина',phone:'79142609616'},TV:{name:'Татьяна Вензель',phone:'79248994882'},TH:{name:'Татьяна Христофорова',phone:'79244646605'},OP:{name:'Ольга Попова',phone:'79627360605'},VN:{name:'Виктория Никитина',phone:'79247611616'}
 };
 const refParam=new URLSearchParams(location.search).get('ref');
 if(refParam&&CONSULTANTS[refParam])localStorage.setItem('ps_ref',refParam);
