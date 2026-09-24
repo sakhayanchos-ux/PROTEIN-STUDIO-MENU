@@ -1,0 +1,26 @@
+name: Import site media
+on:
+  push:
+    paths:
+      - ".github/workflows/import-assets.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  import-media:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download media
+        run: |
+          curl --fail --location 'https://d2jqrm6oza8nb6.cloudfront.net/datasets/5a1bd492-a017-4a17-ae66-79827a61e40f.mp4?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiMzMyZmVhYWIzMmFkOWQ4MiIsImJ1Y2tldCI6InJ1bndheS1kYXRhc2V0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MDM0MzA4M30.3V5CMkEBn-7XW-Ez_YKce9Gjev8txZU3JWk6ecrCvHc' --output earn-video.mp4
+          curl --fail --location 'https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3-pro-image/images/bdf92bfc-0d70-466a-b080-94fb47995fb9/d46afc1c-25c2-45cc-a072-fac47dc5006e/____________________________________________________Protein_.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiYmM1YTdhNTczNDQzZTdhYiIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MDM0Njk2N30.lFLQLeA74rQ2IL4vQc5PCiQ3nu8MfzBJmqnileYQF5k' --output three-breakfasts.png
+          ls -lh earn-video.mp4 three-breakfasts.png
+      - name: Commit media
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add earn-video.mp4 three-breakfasts.png
+          git diff --cached --quiet || git commit -m "Add site media assets"
+          git push
