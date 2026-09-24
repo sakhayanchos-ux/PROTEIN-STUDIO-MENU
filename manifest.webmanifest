@@ -6,6 +6,6 @@
   "background_color":"#eef2ff",
   "theme_color":"#eef2ff",
   "icons":[
-    {"src":"assets/app-icon.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
+    {"src":"app-icon.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
   ]
 }
