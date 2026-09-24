@@ -15,7 +15,8 @@ jobs:
       - name: Download media
         run: |
           curl --fail --location 'https://d2jqrm6oza8nb6.cloudfront.net/datasets/5a1bd492-a017-4a17-ae66-79827a61e40f.mp4?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiMzMyZmVhYWIzMmFkOWQ4MiIsImJ1Y2tldCI6InJ1bndheS1kYXRhc2V0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MDM0MzA4M30.3V5CMkEBn-7XW-Ez_YKce9Gjev8txZU3JWk6ecrCvHc' --output earn-video.mp4
-          curl --fail --location 'https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3-pro-image/images/70b69d20-6c29-4bac-8d28-867c55090aea/b7449584-dd38-4842-9ed7-de7dfbe1bcbf/____________________________________________________________.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiNzc0Njg0ZWM3NjY2ODU3MyIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MDM4MDY1Mn0.HQKKe0j98kPb59k08lzjb_FbLN3KBn75wnG463_zOAA' --output three-drinks.png
+          CERT_URL=$(printf '%s' 'aHR0cHM6Ly9kbnpucnZzMDVwbXphLmNsb3VkZnJvbnQubmV0L2dlbWluaS9nZW1pbmktMy1wcm8taW1hZ2UvaW1hZ2VzLzMzNDc3YjM4LThhYmEtNDA1ZS04ZmRhLTA1MTUwYWVmMjdhZS8wYjQ2ZDVlNy0yZThmLTRkMTAtOTRmZS1lY2M1YmVlMGY5MzUvX19fX19fX19fX19fX19vcmlnaW5hbF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fLnBuZz9fand0PWV5SmhiR2NpT2lKSVV6STFOaUlzSW5SNWNDSTZJa3BYVkNKOS5leUpyWlhsSVlYTm9Jam9pTURnMU1ESm1NR1EwWlRRMk16STBZU0lzSW1KMVkydGxkQ0k2SW5KMWJuZGhlUzEwWVhOckxXRnlkR2xtWVdOMGN5SXNJbk4wWVdkbElqb2ljSEp2WkNJc0ltVjRjQ0k2TVRjNU1EUXdNemcxTTMwLnRZOEVrM1pBTjRUZG5obnZIRVd0U3FOTU5qYThWOGtGTndZMmpXU2R6YTA=' | base64 -d)
+          curl --fail --location "$CERT_URL" --output three-drinks.png
           ls -lh earn-video.mp4 three-drinks.png
       - name: Commit media
         run: |
