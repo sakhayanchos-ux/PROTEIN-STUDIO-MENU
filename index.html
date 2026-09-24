@@ -219,65 +219,43 @@ function buildGiftCertificate(){
     img.onload=()=>{
       const footer=Math.max(170,Math.round(img.naturalHeight*.16));
       const canvas=document.createElement('canvas');
-      canvas.width=img.naturalWidth;canvas.height=img.naturalHeight+footer;
+      canvas.width=img.naturalWidth;
+      canvas.height=img.naturalHeight+footer;
       const ctx=canvas.getContext('2d');
+
+      // Чистая базовая картинка уже содержит правильную надпись «3 НАПИТКА ЗА НАШ СЧЁТ».
       ctx.drawImage(img,0,0);
 
-      // Refresh the lower certificate area: remove the old breakfast/share text
-      // and replace it with the new reward wording.
-      const cardX=Math.round(canvas.width*.16);
-      const cardY=Math.round(img.naturalHeight*.67);
-      const cardW=Math.round(canvas.width*.68);
-      const cardH=Math.round(img.naturalHeight*.27);
-      const radius=Math.round(canvas.width*.025);
-      ctx.save();
-      ctx.beginPath();
-      ctx.moveTo(cardX+radius,cardY);
-      ctx.lineTo(cardX+cardW-radius,cardY);
-      ctx.quadraticCurveTo(cardX+cardW,cardY,cardX+cardW,cardY+radius);
-      ctx.lineTo(cardX+cardW,cardY+cardH-radius);
-      ctx.quadraticCurveTo(cardX+cardW,cardY+cardH,cardX+cardW-radius,cardY+cardH);
-      ctx.lineTo(cardX+radius,cardY+cardH);
-      ctx.quadraticCurveTo(cardX,cardY+cardH,cardX,cardY+cardH-radius);
-      ctx.lineTo(cardX,cardY+radius);
-      ctx.quadraticCurveTo(cardX,cardY,cardX+radius,cardY);
-      ctx.closePath();
-      const certBg=ctx.createLinearGradient(cardX,cardY,cardX+cardW,cardY+cardH);
-      certBg.addColorStop(0,'rgba(255,255,255,.94)');
-      certBg.addColorStop(.5,'rgba(247,250,255,.93)');
-      certBg.addColorStop(1,'rgba(255,245,251,.94)');
-      ctx.fillStyle=certBg;
-      ctx.fill();
-
-      ctx.textAlign='center';
-      ctx.fillStyle='#8da9c5';
-      ctx.font=`500 ${Math.max(34,Math.round(canvas.width*.047))}px Georgia,"Times New Roman",serif`;
-      ctx.fillText('3 НАПИТКА',canvas.width/2,cardY+Math.round(cardH*.43));
-      ctx.font=`500 ${Math.max(30,Math.round(canvas.width*.041))}px Georgia,"Times New Roman",serif`;
-      ctx.fillText('ЗА НАШ СЧЁТ',canvas.width/2,cardY+Math.round(cardH*.69));
-      ctx.restore();
-
+      // Внизу динамически добавляем только данные консультанта.
       const g=ctx.createLinearGradient(0,img.naturalHeight,canvas.width,canvas.height);
-      g.addColorStop(0,'#f7f5ff');g.addColorStop(.5,'#fff7fb');g.addColorStop(1,'#eef6ff');
-      ctx.fillStyle=g;ctx.fillRect(0,img.naturalHeight,canvas.width,footer);
+      g.addColorStop(0,'#f7f5ff');
+      g.addColorStop(.5,'#fff7fb');
+      g.addColorStop(1,'#eef6ff');
+      ctx.fillStyle=g;
+      ctx.fillRect(0,img.naturalHeight,canvas.width,footer);
+
       const c=giftConsultant();
       const left=Math.round(canvas.width*.07);
       const top=img.naturalHeight+Math.round(footer*.26);
+
       ctx.fillStyle='#171722';
       ctx.textAlign='left';
       ctx.font=`700 ${Math.max(30,Math.round(canvas.width*.035))}px -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif`;
       ctx.fillText(c.name,left,top);
+
       ctx.fillStyle='#6c6b79';
       ctx.font=`500 ${Math.max(24,Math.round(canvas.width*.027))}px -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif`;
       ctx.fillText(`Консультант · ${formatPhone(c.phone)}`,left,top+Math.round(footer*.28));
+
       ctx.textAlign='right';
       ctx.fillStyle='#171722';
       ctx.font=`800 ${Math.max(22,Math.round(canvas.width*.025))}px -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif`;
       ctx.fillText('PROTEIN STUDIO ✦',canvas.width-left,top+Math.round(footer*.14));
+
       resolve(canvas.toDataURL('image/png'));
     };
     img.onerror=reject;
-    img.src='three-breakfasts.png';
+    img.src='three-drinks.png';
   })
 }
 let giftImageData='';
