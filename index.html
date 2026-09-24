@@ -129,7 +129,7 @@ button,input,select,textarea{font:inherit}button{cursor:pointer;color:inherit}.s
     <p class="gift-subtitle">Ты получил подарок — 3 завтрака в PROTEIN STUDIO.</p>
     <img id="giftPreview" class="gift-preview" alt="Сертификат на 3 завтрака">
     <div class="gift-actions">
-      <button class="crystal-btn" id="downloadGift">СКАЧАТЬ КАРТИНКУ ↓</button>
+      <button class="crystal-btn" id="downloadGift">СОХРАНИТЬ КАРТИНКУ ↓</button>
       <button class="crystal-btn" id="closeGift">ЗАКРЫТЬ</button>
     </div>
   </div>
@@ -249,9 +249,34 @@ async function openGiftModal(){
   if(!giftImageData){giftImageData=await buildGiftCertificate();giftPreview.src=giftImageData}
 }
 function closeGiftModal(){giftModal.classList.remove('open');giftModal.setAttribute('aria-hidden','true')}
+function dataUrlToBlob(dataUrl){
+  const parts=dataUrl.split(',');
+  const mime=(parts[0].match(/data:(.*?);base64/)||[])[1]||'image/png';
+  const bin=atob(parts[1]);
+  const bytes=new Uint8Array(bin.length);
+  for(let i=0;i<bin.length;i++)bytes[i]=bin.charCodeAt(i);
+  return new Blob([bytes],{type:mime})
+}
 async function downloadGiftImage(){
   if(!giftImageData)giftImageData=await buildGiftCertificate();
-  const a=document.createElement('a');a.href=giftImageData;a.download='3-завтрака-PROTEIN-STUDIO.png';document.body.appendChild(a);a.click();a.remove()
+  const blob=dataUrlToBlob(giftImageData);
+  const file=new File([blob],'3-завтрака-PROTEIN-STUDIO.png',{type:'image/png'});
+  try{
+    if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){
+      await navigator.share({files:[file],title:'3 завтрака PROTEIN STUDIO'});
+      return
+    }
+  }catch(e){
+    if(e&&e.name==='AbortError')return
+  }
+  const objectUrl=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=objectUrl;
+  a.download='3-завтрака-PROTEIN-STUDIO.png';
+  a.style.display='none';
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(()=>{a.remove();URL.revokeObjectURL(objectUrl)},1500)
 }
 function updateShare(){shareCount=Math.max(0,Math.min(5,shareCount));shareText.textContent=`${shareCount}/5`;shareProgress.style.width=`${shareCount*20}%`;reward.classList.toggle('open',shareCount>=5)}
 shareBtn.onclick=async()=>{const before=shareCount;const url=new URL(location.href);if(ref)url.searchParams.set('ref',ref);const data={title:'PROTEIN STUDIO',text:'Посмотри меню PROTEIN STUDIO ✦',url:url.toString()};try{if(navigator.share){await navigator.share(data)}else{window.open(`https://wa.me/?text=${encodeURIComponent(data.text+' '+data.url)}`,'_blank')}shareCount=Math.min(5,shareCount+1);localStorage.setItem('ps_share',shareCount);updateShare();if(before<5&&shareCount>=5)openGiftModal().catch(()=>{})}catch(e){}}
