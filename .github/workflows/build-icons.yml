@@ -1,0 +1,26 @@
+name: Build app icons
+on:
+  push:
+    paths:
+      - ".github/workflows/build-icons.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  build-icons:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build square icons
+        run: |
+          convert app-icon.png -resize 512x512^ -gravity center -extent 512x512 -background "#eef2ff" -alpha remove -alpha off icon-512.png
+          convert app-icon.png -resize 192x192^ -gravity center -extent 192x192 -background "#eef2ff" -alpha remove -alpha off icon-192.png
+          convert app-icon.png -resize 180x180^ -gravity center -extent 180x180 -background "#eef2ff" -alpha remove -alpha off apple-touch-icon.png
+      - name: Commit icons
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add icon-512.png icon-192.png apple-touch-icon.png
+          git diff --cached --quiet || git commit -m "Build dedicated app icons"
+          git push
