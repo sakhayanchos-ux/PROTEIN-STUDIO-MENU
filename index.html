@@ -105,10 +105,10 @@ button,input,select,textarea{font:inherit}button{cursor:pointer;color:inherit}.s
     </div>
   <div class="share-box">
     <strong>ПОПРОБУЙ СНАЧАЛА САМ ✦</strong>
-    <p>Поделись PROTEIN STUDIO с 5 друзьями и открой приглашение на <strong>3 завтрака за наш счёт</strong>.</p>
+    <p>Поделись PROTEIN STUDIO с 5 друзьями и открой приглашение на <strong>3 напитка за наш счёт</strong>.</p>
     <div><span id="shareText">0/5</span></div><div class="share-progress"><div id="shareProgress"></div></div>
     <button class="crystal-btn" id="shareBtn" style="width:100%">ПОДЕЛИТЬСЯ ✦</button>
-    <div class="reward" id="reward"><strong>ПОДАРОК ОТКРЫТ ✦</strong><p style="margin:8px 0 12px">Ты получил сертификат на 3 завтрака.</p><button class="crystal-btn" id="openGiftBtn" style="width:100%">ОТКРЫТЬ ПОДАРОК ✦</button><button class="crystal-btn" id="earnWhatsApp" style="width:100%;margin-top:8px">Я ХОЧУ ЗАРАБОТАТЬ →</button></div>
+    <div class="reward" id="reward"><strong>ПОДАРОК ОТКРЫТ ✦</strong><p style="margin:8px 0 12px">Ты получил сертификат на 3 напитка.</p><button class="crystal-btn" id="openGiftBtn" style="width:100%">ОТКРЫТЬ ПОДАРОК ✦</button><button class="crystal-btn" id="earnWhatsApp" style="width:100%;margin-top:8px">Я ХОЧУ ЗАРАБОТАТЬ →</button></div>
   </div>
   <div class="disclaimer">Возможность дохода не является гарантией заработка. Результаты индивидуальны и зависят от личных усилий, времени, навыков и результатов каждого человека. Информация носит ознакомительный характер.</div>
 </section>
@@ -126,8 +126,8 @@ button,input,select,textarea{font:inherit}button{cursor:pointer;color:inherit}.s
   <div class="gift-dialog glass" role="dialog" aria-modal="true" aria-labelledby="giftTitle">
     <div class="gift-confetti">✦ ✧ ✦</div>
     <h2 id="giftTitle">ПОЗДРАВЛЯЕМ! 🎉</h2>
-    <p class="gift-subtitle">Ты получил подарок — 3 завтрака в PROTEIN STUDIO.</p>
-    <img id="giftPreview" class="gift-preview" alt="Сертификат на 3 завтрака">
+    <p class="gift-subtitle">Ты получил подарок — 3 напитка в PROTEIN STUDIO.</p>
+    <img id="giftPreview" class="gift-preview" alt="Сертификат на 3 напитка">
     <div class="gift-actions">
       <button class="crystal-btn" id="downloadGift">СОХРАНИТЬ / СКАЧАТЬ ↓</button>
       <button class="crystal-btn gift-open-image" id="openGiftImage">ОТКРЫТЬ КАРТИНКУ ↗</button>
@@ -222,6 +222,41 @@ function buildGiftCertificate(){
       canvas.width=img.naturalWidth;canvas.height=img.naturalHeight+footer;
       const ctx=canvas.getContext('2d');
       ctx.drawImage(img,0,0);
+
+      // Refresh the lower certificate area: remove the old breakfast/share text
+      // and replace it with the new reward wording.
+      const cardX=Math.round(canvas.width*.16);
+      const cardY=Math.round(img.naturalHeight*.67);
+      const cardW=Math.round(canvas.width*.68);
+      const cardH=Math.round(img.naturalHeight*.27);
+      const radius=Math.round(canvas.width*.025);
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(cardX+radius,cardY);
+      ctx.lineTo(cardX+cardW-radius,cardY);
+      ctx.quadraticCurveTo(cardX+cardW,cardY,cardX+cardW,cardY+radius);
+      ctx.lineTo(cardX+cardW,cardY+cardH-radius);
+      ctx.quadraticCurveTo(cardX+cardW,cardY+cardH,cardX+cardW-radius,cardY+cardH);
+      ctx.lineTo(cardX+radius,cardY+cardH);
+      ctx.quadraticCurveTo(cardX,cardY+cardH,cardX,cardY+cardH-radius);
+      ctx.lineTo(cardX,cardY+radius);
+      ctx.quadraticCurveTo(cardX,cardY,cardX+radius,cardY);
+      ctx.closePath();
+      const certBg=ctx.createLinearGradient(cardX,cardY,cardX+cardW,cardY+cardH);
+      certBg.addColorStop(0,'rgba(255,255,255,.94)');
+      certBg.addColorStop(.5,'rgba(247,250,255,.93)');
+      certBg.addColorStop(1,'rgba(255,245,251,.94)');
+      ctx.fillStyle=certBg;
+      ctx.fill();
+
+      ctx.textAlign='center';
+      ctx.fillStyle='#8da9c5';
+      ctx.font=`500 ${Math.max(34,Math.round(canvas.width*.047))}px Georgia,"Times New Roman",serif`;
+      ctx.fillText('3 НАПИТКА',canvas.width/2,cardY+Math.round(cardH*.43));
+      ctx.font=`500 ${Math.max(30,Math.round(canvas.width*.041))}px Georgia,"Times New Roman",serif`;
+      ctx.fillText('ЗА НАШ СЧЁТ',canvas.width/2,cardY+Math.round(cardH*.69));
+      ctx.restore();
+
       const g=ctx.createLinearGradient(0,img.naturalHeight,canvas.width,canvas.height);
       g.addColorStop(0,'#f7f5ff');g.addColorStop(.5,'#fff7fb');g.addColorStop(1,'#eef6ff');
       ctx.fillStyle=g;ctx.fillRect(0,img.naturalHeight,canvas.width,footer);
@@ -265,13 +300,13 @@ function isAppleMobileBrowser(){
 async function downloadGiftImage(){
   if(!giftImageData)giftImageData=await buildGiftCertificate();
   const blob=dataUrlToBlob(giftImageData);
-  const filename='3-завтрака-PROTEIN-STUDIO.png';
+  const filename='3-напитка-PROTEIN-STUDIO.png';
 
   if(isAppleMobileBrowser()&&typeof File!=='undefined'){
     const file=new File([blob],filename,{type:'image/png'});
     try{
       if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){
-        await navigator.share({files:[file],title:'3 завтрака PROTEIN STUDIO'});
+        await navigator.share({files:[file],title:'3 напитка PROTEIN STUDIO'});
         return
       }
     }catch(e){
