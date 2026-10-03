@@ -362,7 +362,14 @@ function openProduct(id){
     saveCart();
     addedNote.textContent='Добавлено в корзину ✓';
     productQty=1;
+    adds=[];
+    sheet.querySelectorAll('#addChoices .add-row').forEach(row=>{
+      const qtyEl=row.querySelector('.add-qty');
+      if(qtyEl)qtyEl.textContent='0';
+      row.classList.remove('on')
+    });
     calc();
+    buildSummaryText.textContent='';
     setTimeout(()=>{if(addedNote)addedNote.textContent=''},1400)
   };
   productWrap.classList.add('open');
